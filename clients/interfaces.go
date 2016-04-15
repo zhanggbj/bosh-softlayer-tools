@@ -3,6 +3,7 @@ package clients
 type BmpClient interface {
 	Info() (InfoResponse, error)
 	SlPackages() (SlPackagesResponse, error)
+	Bms(deploymentName string) (BmsResponse, error)
 	Stemcells() (StemcellsResponse, error)
 	SlPackageOptions(packageId string) (SlPackageOptionsResponse, error)
 	Tasks(latest int) (TasksResponse, error)

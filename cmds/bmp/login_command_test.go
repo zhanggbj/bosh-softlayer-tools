@@ -10,6 +10,7 @@ import (
 	bmp "github.com/cloudfoundry-community/bosh-softlayer-tools/cmds/bmp"
 
 	clientsfakes "github.com/cloudfoundry-community/bosh-softlayer-tools/clients/fakes"
+	//config "github.com/cloudfoundry-community/bosh-softlayer-tools/config"
 )
 
 var _ = Describe("login command", func() {
@@ -19,6 +20,7 @@ var _ = Describe("login command", func() {
 		options       cmds.Options
 		cmd           cmds.Command
 		fakeBmpClient *clientsfakes.FakeBmpClient
+		//config        config.ConfigInfo
 	)
 
 	BeforeEach(func() {
@@ -33,7 +35,7 @@ var _ = Describe("login command", func() {
 		cmd = bmp.NewLoginCommand(options, fakeBmpClient)
 	})
 
-	Describe("NewLoginCommand", func() {
+	Describe("#NewLoginCommand", func() {
 		It("create new LoginCommand", func() {
 			Expect(cmd).ToNot(BeNil())
 
@@ -57,7 +59,7 @@ var _ = Describe("login command", func() {
 
 	Describe("#Usage", func() {
 		It("returns the usage text of a LoginCommand", func() {
-			Expect(cmd.Usage()).To(Equal("bmp login --username[-u] <username> --password[-p] <password"))
+			Expect(cmd.Usage()).To(Equal("bmp login --username[-u] <username> --password[-p] <password>"))
 		})
 	})
 
@@ -92,7 +94,6 @@ var _ = Describe("login command", func() {
 
 				It("fails validation", func() {
 					cmd = bmp.NewLoginCommand(options, fakeBmpClient)
-
 					validate, err := cmd.Validate()
 					Expect(validate).To(BeFalse())
 					Expect(err).To(HaveOccurred())
@@ -140,6 +141,7 @@ var _ = Describe("login command", func() {
 			BeforeEach(func() {
 				fakeBmpClient.LoginResponse.Status = 200
 				fakeBmpClient.LoginErr = nil
+
 			})
 
 			It("executes with no error", func() {
@@ -148,9 +150,14 @@ var _ = Describe("login command", func() {
 				Expect(err).ToNot(HaveOccurred())
 			})
 
-			It("saves the Username and Password to Config", func() {
-				//TODO: @grace
-			})
+			//It("saves the Username and Password to Config", func() {
+			//	//TODO: @grace
+			//	_, err := cmd.Execute(args)
+			//	Expect(err).ToNot(HaveOccurred())
+			//	Expect(config.Username).To(Equal(("fake-username")))
+			//	Expect(config.Password).To(Equal(("fake-password")))
+			//
+			//})
 		})
 
 		Context("bad LoginCommand", func() {
@@ -165,8 +172,16 @@ var _ = Describe("login command", func() {
 				Expect(err).To(HaveOccurred())
 			})
 
-			//TODO: verify LoginResponse.Status different than 200
-			//TODO: verify Login() execution failing
+			It("response status not equal to 200", func() {
+				rc, err := cmd.Execute(args)
+				Expect(rc).ToNot(Equal(200))
+				Expect(err).To(HaveOccurred())
+			})
+
+			It("fails when login execution fails", func() {
+				_, err := cmd.Execute(args)
+				Expect(err).To(HaveOccurred())
+			})
 		})
 	})
 })

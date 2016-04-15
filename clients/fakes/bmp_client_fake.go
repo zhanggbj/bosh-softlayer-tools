@@ -15,6 +15,9 @@ type FakeBmpClient struct {
 	SlPackagesResponse clients.SlPackagesResponse
 	SlPackagesErr      error
 
+	BmsResponse clients.BmsResponse
+	BmsErr      error
+
 	StemcellResponse clients.StemcellsResponse
 	StemcellErr      error
 
@@ -79,4 +82,8 @@ func (bc *FakeBmpClient) Login(username string, password string) (clients.LoginR
 
 func (bc *FakeBmpClient) CreateBaremetal(createBaremetalInfo clients.CreateBaremetalInfo) (clients.CreateBaremetalResponse, error) {
 	return bc.CreateBaremetalResponse, bc.CreateBaremetalErr
+}
+
+func (bc *FakeBmpClient) Bms(deploymentName string) (clients.BmsResponse, error) {
+	return bc.BmsResponse, bc.BmsErr
 }

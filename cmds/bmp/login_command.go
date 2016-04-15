@@ -39,7 +39,7 @@ func (cmd loginCommand) Description() string {
 }
 
 func (cmd loginCommand) Usage() string {
-	return "bmp login --username[-u] <username> --password[-p] <password"
+	return "bmp login --username[-u] <username> --password[-p] <password>"
 }
 
 func (cmd loginCommand) Options() cmds.Options {
