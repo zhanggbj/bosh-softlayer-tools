@@ -9,17 +9,30 @@ import (
 	clientsfakes "github.com/cloudfoundry-community/bosh-softlayer-tools/clients/fakes"
 	cmds "github.com/cloudfoundry-community/bosh-softlayer-tools/cmds"
 	bmp "github.com/cloudfoundry-community/bosh-softlayer-tools/cmds/bmp"
+<<<<<<< HEAD
 	config "github.com/cloudfoundry-community/bosh-softlayer-tools/config"
+=======
+
+	fakes "github.com/cloudfoundry-community/bosh-softlayer-tools/clients/fakes"
+>>>>>>> upstream/master
 )
 
 var _ = Describe("bms command", func() {
 
 	var (
+<<<<<<< HEAD
 		args          []string
 		options       cmds.Options
 		cmd           cmds.Command
 		config        config.ConfigInfo
 		fakeBmpClient *clientsfakes.FakeBmpClient
+=======
+		args    []string
+		options cmds.Options
+		cmd     cmds.Command
+
+		fakeBmpClient *fakes.FakeBmpClient
+>>>>>>> upstream/master
 	)
 
 	BeforeEach(func() {
@@ -29,7 +42,11 @@ var _ = Describe("bms command", func() {
 			Deployment: "fake-deployment-file",
 		}
 
+<<<<<<< HEAD
 		fakeBmpClient = clientsfakes.NewFakeBmpClient(config.Username, config.Password, "http://fake.target.url")
+=======
+		fakeBmpClient = fakes.NewFakeBmpClient("fake-username", "fake-password", "http://fake.url.com", "fake-config-path")
+>>>>>>> upstream/master
 		cmd = bmp.NewBmsCommand(options, fakeBmpClient)
 	})
 

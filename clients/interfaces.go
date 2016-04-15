@@ -1,6 +1,8 @@
 package clients
 
 type BmpClient interface {
+	ConfigPath() string
+
 	Info() (InfoResponse, error)
 	SlPackages() (SlPackagesResponse, error)
 	Bms(deploymentName string) (BmsResponse, error)
