@@ -3,9 +3,9 @@ package bmp
 import (
 	"errors"
 
+	clients "github.com/cloudfoundry-community/bosh-softlayer-tools/clients"
 	cmds "github.com/cloudfoundry-community/bosh-softlayer-tools/cmds"
 	common "github.com/cloudfoundry-community/bosh-softlayer-tools/common"
-	clients "github.com/cloudfoundry-community/bosh-softlayer-tools/clients"
 )
 
 type bmsCommand struct {
@@ -55,13 +55,13 @@ func (cmd bmsCommand) Validate() (bool, error) {
 
 func (cmd bmsCommand) Execute(args []string) (int, error) {
 	cmd.printer.Printf("Executing %s command: args: %#v, options: %#v", cmd.Name(), cmd.args, cmd.options)
-	deploymentName :="test"
+	deploymentName := "test"
 	bmsResponse, err := cmd.bmpClient.Bms(deploymentName)
 	if err != nil {
 		return bmsResponse.Status, err
 	}
 
-	if bmsResponse.Status !=200 {
+	if bmsResponse.Status != 200 {
 		return bmsResponse.Status, err
 	}
 

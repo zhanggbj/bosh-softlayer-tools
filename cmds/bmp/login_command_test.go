@@ -218,7 +218,6 @@ var _ = Describe("login command", func() {
 				})
 			})
 
-
 			Context("fails when login execution fails", func() {
 				BeforeEach(func() {
 					fakeBmpClient.LoginResponse.Status = 200
