@@ -1,12 +1,8 @@
 package bmp
 
 import (
-<<<<<<< HEAD
 	"errors"
 
-=======
-	clients "github.com/cloudfoundry-community/bosh-softlayer-tools/clients"
->>>>>>> upstream/master
 	cmds "github.com/cloudfoundry-community/bosh-softlayer-tools/cmds"
 	common "github.com/cloudfoundry-community/bosh-softlayer-tools/common"
 	clients "github.com/cloudfoundry-community/bosh-softlayer-tools/clients"
@@ -26,15 +22,9 @@ func NewBmsCommand(options cmds.Options, bmpClient clients.BmpClient) bmsCommand
 	consoleUi := common.NewConsoleUi()
 
 	return bmsCommand{
-<<<<<<< HEAD
-		options: options,
-		ui:      consoleUi,
-		printer: common.NewDefaultPrinter(consoleUi, options.Verbose),
-=======
 		options:   options,
 		ui:        consoleUi,
 		printer:   common.NewDefaultPrinter(consoleUi, options.Verbose),
->>>>>>> upstream/master
 		bmpClient: bmpClient,
 	}
 }
