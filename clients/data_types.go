@@ -68,23 +68,6 @@ type SlPackageOptionsResponse struct {
 	Data   DataPackageOptions `json:"data"`
 }
 
-// /bms
-type BaremetalInfo struct {
-	Id                 int    `json:"id"`
-	Hostname           string `json:"hostname"`
-	Private_ip_address string `json:"private_ip_address"`
-	Public_ip_address  string `json:"public_ip_address"`
-	Hardware_status    string `json:"hardware_status"`
-	Memory             int    `json:"memory"`
-	Cpu                int    `json:"cpu"`
-	Provision_date     string `json:"provision_date"`
-}
-
-type BmsResponse struct {
-	Status int             `json:"status"`
-	Data   []BaremetalInfo `json:"data"`
-}
-
 // /stemcells
 
 type StemcellsResponse struct {

@@ -17,7 +17,7 @@ var _ = Describe("bms command", func() {
 		args          []string
 		options       cmds.Options
 		cmd           cmds.Command
-		fakeBmpClient *clientsfakes.FakeBmpClient
+		fakeBmpClient *fakes.FakeBmpClient
 	)
 
 	BeforeEach(func() {

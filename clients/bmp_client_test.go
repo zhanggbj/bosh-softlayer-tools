@@ -151,7 +151,7 @@ var _ = Describe("BMP client", func() {
 				Hardware_status:    "hardware_status0",
 				Memory:             0,
 				Cpu:                0,
-				Provision_date:     "provision_date0"}))
+				Provision_date:     "2016-01-01T00:00:00-00:00"}))
 			Expect(bmsResponse.Data[1]).To(Equal(clients.BaremetalInfo{
 				Id:                 1,
 				Hostname:           "hostname1",
@@ -160,7 +160,7 @@ var _ = Describe("BMP client", func() {
 				Hardware_status:    "hardware_status1",
 				Memory:             1,
 				Cpu:                1,
-				Provision_date:     "provision_date1"}))
+				Provision_date:     "2016-01-01T00:00:00-00:00"}))
 		})
 
 		It("fails when BMP server /bms/{deployment name} fails", func() {
