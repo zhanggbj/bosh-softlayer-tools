@@ -67,29 +67,6 @@ func (bc *bmpClient) Info() (InfoResponse, error) {
 	return response, nil
 }
 
-func (bc *bmpClient) SlPackages() (SlPackagesResponse, error) {
-	path := fmt.Sprintf("%s/%s", bc.url, "sl/packages")
-	responseBytes, errorCode, err := bc.httpClient.DoRawHttpRequest(path, "GET", &bytes.Buffer{})
-	if err != nil {
-		errorMessage := fmt.Sprintf("bmp: could not calls /sl/packages on BMP server, error message '%s'", err.Error())
-		return SlPackagesResponse{}, errors.New(errorMessage)
-	}
-
-	if slcommon.IsHttpErrorCode(errorCode) {
-		errorMessage := fmt.Sprintf("bmp: could not call /info on BMP server, HTTP error code: '%d'", errorCode)
-		return SlPackagesResponse{}, errors.New(errorMessage)
-	}
-
-	response := SlPackagesResponse{}
-	err = json.Unmarshal(responseBytes, &response)
-	if err != nil {
-		errorMessage := fmt.Sprintf("bmp: failed to decode JSON response, err message '%s'", err.Error())
-		return SlPackagesResponse{}, errors.New(errorMessage)
-	}
-
-	return response, nil
-}
-
 func (bc *bmpClient) Bms(deploymentName string) (BmsResponse, error) {
 	path := fmt.Sprintf("%s/%s/%s", bc.url, "/bms/", deploymentName)
 	responseBytes, errorCode, err := bc.httpClient.DoRawHttpRequest(path, "GET", &bytes.Buffer{})
@@ -108,6 +85,29 @@ func (bc *bmpClient) Bms(deploymentName string) (BmsResponse, error) {
 	if err != nil {
 		errorMessage := fmt.Sprintf("bmp: failed to decode JSON response, err message '%s'", err.Error())
 		return BmsResponse{}, errors.New(errorMessage)
+	}
+
+	return response, nil
+}
+
+func (bc *bmpClient) SlPackages() (SlPackagesResponse, error) {
+	path := fmt.Sprintf("%s/%s", bc.url, "sl/packages")
+	responseBytes, errorCode, err := bc.httpClient.DoRawHttpRequest(path, "GET", &bytes.Buffer{})
+	if err != nil {
+		errorMessage := fmt.Sprintf("bmp: could not calls /sl/packages on BMP server, error message '%s'", err.Error())
+		return SlPackagesResponse{}, errors.New(errorMessage)
+	}
+
+	if slcommon.IsHttpErrorCode(errorCode) {
+		errorMessage := fmt.Sprintf("bmp: could not call /info on BMP server, HTTP error code: '%d'", errorCode)
+		return SlPackagesResponse{}, errors.New(errorMessage)
+	}
+
+	response := SlPackagesResponse{}
+	err = json.Unmarshal(responseBytes, &response)
+	if err != nil {
+		errorMessage := fmt.Sprintf("bmp: failed to decode JSON response, err message '%s'", err.Error())
+		return SlPackagesResponse{}, errors.New(errorMessage)
 	}
 
 	return response, nil
