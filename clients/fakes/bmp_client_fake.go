@@ -14,6 +14,9 @@ type FakeBmpClient struct {
 	InfoResponse clients.InfoResponse
 	InfoErr      error
 
+	BmsResponse clients.BmsResponse
+	BmsErr      error
+
 	SlPackagesResponse clients.SlPackagesResponse
 	SlPackagesErr      error
 
@@ -57,6 +60,10 @@ func (bc *FakeBmpClient) ConfigPath() string {
 
 func (bc *FakeBmpClient) Info() (clients.InfoResponse, error) {
 	return bc.InfoResponse, bc.InfoErr
+}
+
+func (bc *FakeBmpClient) Bms(deploymentName string) (clients.BmsResponse, error) {
+	return bc.BmsResponse, bc.BmsErr
 }
 
 func (bc *FakeBmpClient) SlPackages() (clients.SlPackagesResponse, error) {

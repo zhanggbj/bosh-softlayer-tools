@@ -15,7 +15,13 @@ type Options struct {
 	Username string `long:"username" short:"u" description:"the username for login in"`
 	Password string `long:"password" short:"p" description:"the password for login in"`
 
+<<<<<<< HEAD
 	Deployment string `long:"deployment" short:"d" description:"the deployment file"`
+=======
+	Target string `long:"target" short:"t" description:"the target URL"`
+
+	Deployment string `long:"Deployment" short:"d" description:"The deployment file"`
+>>>>>>> upstream/master
 }
 
 type Command interface {
