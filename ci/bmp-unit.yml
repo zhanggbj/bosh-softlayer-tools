@@ -7,4 +7,4 @@ inputs:
     path: gopath/src/github.com/zhanggbj/bosh-softlayer-tools
 
 run:
-  path: gopath/src/github.com/zhanggbj/bosh-softlayer-tools/bin/test-unit
+  path: gopath/src/github.com/zhanggbj/bosh-softlayer-tools/ci/bmp-unit.sh
