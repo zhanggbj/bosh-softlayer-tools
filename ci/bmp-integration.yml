@@ -3,7 +3,7 @@ platform: linux
 image: docker:///posijon/slci
 
 inputs:
-  - name: softlayer-go
+  - name: bosh-softlayer-tools
     path: gopath/src/github.com/zhanggbj/bosh-softlayer-tools
 
 run:
