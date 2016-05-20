@@ -8,7 +8,6 @@
   base_gopath=$( cd $base/../../../.. && pwd )
   echo $base_gopath
 
-  sudo find / -name bosh-softlayer-tools
 
   export GOPATH=$base_gopath
 #  export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
