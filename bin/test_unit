@@ -4,9 +4,13 @@
   set -e
 
   base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
+  echo &base
   base_gopath=$( cd $base/../../../.. && pwd )
+  echo base_gopath
 
-  export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
+  sudo find / -name bosh-softlayer-tools
+
+#  export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
 
   function printStatus {
       if [ $? -eq 0 ]; then
