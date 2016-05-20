@@ -1,0 +1,41 @@
+resources:
+- name: bosh-softlayer-tools
+  type: git
+  source:
+    uri: https://github.com/zhanggbj/bosh-softlayer-tools.git
+    branch: WIP-ci
+
+jobs:
+- name: bmp-unit
+  public: true
+  plan:
+  - get: bosh-softlayer-tools
+    trigger: true
+  - task: unit
+    file: bosh-softlayer-tools/ci/bmp-unit.yml
+    config:
+      params:
+        SL_USERNAME: fake-username
+        SL_API_KEY: fake-api-key
+
+- name: bmp-integration
+  plan:
+  - get: bosh-softlayer-tools
+    trigger: true
+    passed: [bmp-unit]
+  - task: integration
+    file: bosh-softlayer-tools/ci/bmp-integration.yml
+    config:
+      params:
+        TARGET: {{TARGET}}
+        BMP_USERNAME: {{BMP_USERNAME}}
+        BMP_PASSWORD: {{BMP_PASSWORD}}
+
+groups:
+- name: bosh-softlayer-tools
+  jobs:
+  - bmp-unit
+  - bmp-integration
+
+
+
