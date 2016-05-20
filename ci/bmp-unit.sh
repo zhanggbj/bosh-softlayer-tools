@@ -2,9 +2,14 @@
 
 set -e
 
+go version
 go get github.com/tools/godep
 go get github.com/onsi/ginkgo/ginkgo
+go get github.com/golang/go/src/cmd/vet
 go get github.com/onsi/gomega
 
+echo $PWD
+
 echo "run ut"
-./bosh-softlayer-tools/bin/test-unit
+
+./gopath/src/github.com/zhanggbj/bosh-softlayer-tools/bin/test-unit
