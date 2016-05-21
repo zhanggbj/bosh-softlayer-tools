@@ -9,8 +9,8 @@
   echo $base_gopath
 
 
-  export GOPATH=$base_gopath
-#  export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
+  export GOPATH=$base
+#  export GOPATH=$base:$base_gopath:$GOPATH
 
   function printStatus {
       if [ $? -eq 0 ]; then
