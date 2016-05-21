@@ -3,13 +3,14 @@
 (
   set -e
 
+  go version
   echo "GOPATH 0 " $GOPATH
   base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
   echo $base
   base_gopath=$( cd $base/../../../.. && pwd )
   echo $base_gopath
 
-  export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
+  export GOPATH=$base/Godeps/_workspace:$base:$base_gopath:$GOPATH
 
   echo "GOPATH 1 " $GOPATH
 
