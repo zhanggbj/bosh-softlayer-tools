@@ -27,7 +27,7 @@ jobs:
     file: bosh-softlayer-tools/ci/bmp-integration.yml
     config:
       params:
-        TARGET: {{TARGET}}
+        TARGET_URL: {{TARGET_URL}}
         BMP_USERNAME: {{BMP_USERNAME}}
         BMP_PASSWORD: {{BMP_PASSWORD}}
         DEPLOYMENT: bosh-softlayer-tools/test_fixtures/bmp/deployment.yml

@@ -31,6 +31,8 @@ go fmt ./...
 echo -e "\n cd to base of project..."
 cd $base
 
+echo "Using Baremetal Server " $TARGET_URL
+
 echo -e "\n Integration Testing packages:"
 ginkgo -r -p -v --noisyPendings integration
 
