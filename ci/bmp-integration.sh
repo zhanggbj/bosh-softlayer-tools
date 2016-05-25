@@ -34,7 +34,7 @@ cd $base
 echo "Using Baremetal Server:" $TARGET_URL
 ping -c 3 10.113.189.114
 
-config_file="~/.bmp_config"
+config_file="$HOME/.bmp_config"
 echo "{}" > ${config_file}
 
 echo -e "\n Integration Testing packages:"
