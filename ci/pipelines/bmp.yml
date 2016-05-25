@@ -30,6 +30,7 @@ jobs:
         TARGET: {{TARGET}}
         BMP_USERNAME: {{BMP_USERNAME}}
         BMP_PASSWORD: {{BMP_PASSWORD}}
+        DEPLOYMENT: bosh-softlayer-tools/test_fixtures/bmp/deployment.yml
 
 groups:
 - name: bosh-softlayer-tools
