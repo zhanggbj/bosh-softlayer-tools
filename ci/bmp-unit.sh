@@ -24,7 +24,7 @@ function printStatus {
   }
 
   trap printStatus EXIT
-  export GOPATH=$(godep path):$GOPATH
+#  export GOPATH=$(godep path):$GOPATH
 
   export BMP_UT_OUTPUT=False
 
