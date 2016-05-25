@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	SESSION_TIMEOUT = 5 * time.Second
+	SESSION_TIMEOUT = 10 * time.Second
 )
 
 func RunBmp(args ...string) *Session {

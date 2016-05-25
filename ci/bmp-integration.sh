@@ -37,6 +37,8 @@ ping -c 3 10.113.189.114
 config_file="$HOME/.bmp_config"
 echo "{}" > ${config_file}
 
+ls -al
+
 echo -e "\n Integration Testing packages:"
 ginkgo -r -p -v --noisyPendings integration
 
