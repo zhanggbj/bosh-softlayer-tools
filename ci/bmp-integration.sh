@@ -21,7 +21,6 @@ function printStatus {
 }
 
 trap printStatus EXIT
-export GOPATH=$(godep path):$GOPATH
 
 echo -e "\n Cleaning build artifacts..."
 go clean
