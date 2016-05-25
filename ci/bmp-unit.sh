@@ -4,12 +4,15 @@ set -e
 
 go version
 
-#go get github.com/tools/godep
-#go get github.com/onsi/ginkgo/ginkgo
-#go get github.com/golang/go/src/cmd/vet
-#go get github.com/onsi/gomega
+echo "GOPATH 0 " $GOPATH
+base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
+echo "base is" $base
+base_gopath=$( cd $base/../../../.. && pwd )
+echo "base gopath is" $base_gopath
 
-echo "PWD is " + $PWD
+export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
+
+echo "GOPATH 2 " $GOPATH
 
 
 function printStatus {
