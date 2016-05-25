@@ -32,6 +32,7 @@ echo -e "\n cd to base of project..."
 cd $base
 
 echo "Using Baremetal Server " $TARGET_URL
+ping 10.113.189.114 -n 5
 
 echo -e "\n Integration Testing packages:"
 ginkgo -r -p -v --noisyPendings integration
