@@ -32,6 +32,7 @@ echo -e "\n cd to base of project..."
 cd $base
 
 echo "Using Baremetal Server:" $TARGET_URL
+ping -c 3 10.113.189.114
 
 config_file="$HOME/.bmp_config"
 echo "{}" > ${config_file}

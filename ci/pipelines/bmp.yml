@@ -35,7 +35,6 @@ jobs:
   plan:
   - get: bosh-softlayer-tools
     trigger: true
-    passed: [bmp-integration]
   - task: integration
     file: bosh-softlayer-tools/ci/bmp-promote.yml
     config:
