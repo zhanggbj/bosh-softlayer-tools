@@ -1,0 +1,11 @@
+---
+platform: linux
+image: docker:///posijon/slci
+
+inputs:
+  - name: bosh-softlayer-tools
+    path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools
+outputs:
+  - name: promoted
+run:
+  path: bosh-softlayer-tools/ci/bmp-promote.sh

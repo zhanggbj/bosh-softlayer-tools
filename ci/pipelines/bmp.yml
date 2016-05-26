@@ -31,11 +31,24 @@ jobs:
         BMP_USERNAME: {{BMP_USERNAME}}
         BMP_PASSWORD: {{BMP_PASSWORD}}
 
+- name: bmp-promote
+  plan:
+  - get: bosh-softlayer-tools
+    trigger: true
+    passed: [bmp-integration]
+  - task: integration
+    file: bosh-softlayer-tools/ci/bmp-promote.yml
+    config:
+      params:
+        S3_ACCESS_KEY_ID:     {{s3_access_key__primary}}
+        S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
+
 groups:
 - name: bosh-softlayer-tools
   jobs:
   - bmp-unit
   - bmp-integration
+  - bmp-promote
 
 
 
