@@ -21,7 +21,7 @@ echo "PWD is" $PWD
 ls -al
 
 echo -e "\nGenerating Binary: bmp..."
-go build -o $(dirname $0)/../out/bmp-$version ./main/bmp/bmp.go
+go build -o $(dirname $0)/../out/bmp-$version $(dirname $0)/../main/bmp/bmp.go
 chmod +x out/bmp-$version
 
 cp out/bmp-$version promoted/repo
