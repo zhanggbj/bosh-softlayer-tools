@@ -13,8 +13,8 @@ set -e -x
 # Creates an integer version number from the semantic version format
 # May be changed when we decide to fully use semantic versions for releases
 
-version=version-semver/number
-echo $version > promoted/version
+version="0.0.1"
+#echo $version > promoted/version
 
 echo -e "\nGenerating Binary: bmp..."
 go build -o $(dirname $0)/../out/bmp-$version ./main/bmp/bmp.go
