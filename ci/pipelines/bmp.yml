@@ -5,6 +5,14 @@ resources:
     uri: https://github.com/zhanggbj/bosh-softlayer-tools.git
     branch: WIP-ci
 
+- name: version-semver
+  type: semver
+  source:
+    key:               current-version
+    bucket:            {{s3_pipeline_bucket}}
+    access_key_id:     {{s3_access_key_id}}
+    secret_access_key: {{s3_secret_access_key}}
+
 jobs:
 - name: bmp-unit
   public: true
