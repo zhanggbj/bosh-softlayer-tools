@@ -28,8 +28,10 @@ go clean
 echo -e "\n Formatting packages..."
 go fmt ./...
 
+echo "pwd is" $PWD
 echo -e "\n cd to base of project..."
 cd $base
+echo "pwd is" $PWD
 
 echo "Using Baremetal Server:" $TARGET_URL
 ping -c 3 10.113.189.114
