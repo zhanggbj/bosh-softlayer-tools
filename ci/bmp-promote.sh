@@ -16,6 +16,10 @@ set -e -x
 version="0.0.1"
 #echo $version > promoted/version
 
+echo "PWD is" $PWD
+
+ls -al
+
 echo -e "\nGenerating Binary: bmp..."
 go build -o $(dirname $0)/../out/bmp-$version ./main/bmp/bmp.go
 chmod +x out/bmp-$version
