@@ -5,6 +5,6 @@ image: docker:///posijon/slci
 inputs:
   - name: bosh-softlayer-tools
     path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools
-
+  - name: version-semver
 run:
   path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools/ci/bmp-integration.sh
