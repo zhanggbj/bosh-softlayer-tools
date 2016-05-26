@@ -35,11 +35,12 @@ jobs:
   plan:
   - get: bosh-softlayer-tools
     trigger: true
+    passed: [bmp-integration]
   - task: integration
     file: bosh-softlayer-tools/ci/bmp-promote.yml
     config:
       params:
-        S3_ACCESS_KEY_ID:     {{s3_access_key__primary}}
+        S3_ACCESS_KEY_ID: {{s3_access_key__primary}}
         S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
 
 groups:
