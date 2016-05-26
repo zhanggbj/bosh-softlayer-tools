@@ -12,9 +12,6 @@ set -e -x
 
 # Creates an integer version number from the semantic version format
 # May be changed when we decide to fully use semantic versions for releases
-pwd
-cd -
-pwd
 
 version=version-semver/number
 echo $version > promoted/version
