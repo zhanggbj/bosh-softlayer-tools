@@ -17,8 +17,16 @@ version="0.0.1"
 #echo $version > promoted/version
 
 echo "PWD is" $PWD
-
 ls -al
+
+base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
+
+base_gopath=$( cd $base/../../../.. && pwd )
+
+export GOPATH=$base/Godeps/_workspace:$base_gopath:$GOPATH
+
+echo "GOPATH=" $GOPATH
+
 
 echo -e "\nGenerating Binary: bmp..."
 go build -o $(dirname $0)/../out/bmp-$version $(dirname $0)/../main/bmp/bmp.go
