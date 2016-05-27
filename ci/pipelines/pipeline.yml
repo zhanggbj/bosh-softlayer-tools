@@ -28,7 +28,7 @@ jobs:
     trigger: true
 
   - task: bst-unit
-    file: bosh-softlayer-tools/ci/bst-unit.yml
+    file: bosh-softlayer-tools/ci/tasks/bst-unit.yml
     config:
       params:
         SL_USERNAME: fake-username
@@ -41,7 +41,7 @@ jobs:
     passed: [bst-unit]
 
   - task: bst-integration
-    file: bosh-softlayer-tools/ci/bst-integration.yml
+    file: bosh-softlayer-tools/ci/tasks/bst-integration.yml
     config:
       params:
         TARGET_URL: {{TARGET_URL}}
@@ -58,7 +58,7 @@ jobs:
     passed: [bst-integration]
 
   - task: bst-promote-build
-    file: bosh-softlayer-tools/ci/bst-promote.yml
+    file: bosh-softlayer-tools/ci/tasks/bst-promote.yml
     config:
       params:
         S3_ACCESS_KEY_ID: {{s3_access_key__primary}}
