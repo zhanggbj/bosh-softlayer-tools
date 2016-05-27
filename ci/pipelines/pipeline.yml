@@ -72,7 +72,7 @@ groups:
   jobs:
   - bst-unit
   - bst-integration
-  - bst-promote
+  - bst-promote-build
 
 
 

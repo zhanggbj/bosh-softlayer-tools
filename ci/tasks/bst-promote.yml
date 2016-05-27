@@ -11,4 +11,4 @@ outputs:
   - name: promoted
 
 run:
-  path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools/ci/bmp-promote.sh
+  path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools/ci/tasks/bst-promote.sh
