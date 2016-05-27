@@ -29,4 +29,5 @@ echo -e "\nGenerating bosh-softlayer-tools"
 tar -cvf bosh-softlayer-tools-$version.tar -C $base/out/ $base/out/*
 
 mv bosh-softlayer-tools-$version.tar promoted/
+ls promoted/
 
