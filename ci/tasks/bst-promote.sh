@@ -28,5 +28,5 @@ chmod +x $base/out/sl_stemcells
 echo -e "\nGenerating bosh-softlayer-tools"
 tar -cvf bosh-softlayer-tools-$version.tar -C $base/out/ $base/out/*
 
-mv $base/out/bosh-softlayer-tools-$version.tar promoted/
+mv bosh-softlayer-tools-$version.tar promoted/
 
