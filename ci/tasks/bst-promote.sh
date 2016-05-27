@@ -4,7 +4,7 @@ set -e -x
 
 version=`cat version-semver/number`
 
-base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
+base=$( cd "$( dirname "$( dirname "$0" )")"/.. && pwd )
 
 base_gopath=$( cd $base/../../../.. && pwd )
 
