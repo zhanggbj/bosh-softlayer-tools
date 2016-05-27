@@ -32,7 +32,7 @@ echo -e "\n cd to base of project..."
 cd $base
 
 echo "Using Baremetal Server:" $TARGET_URL
-ip_address = $(echo $TARGET_URL | cut -d"/" -f3 | cut -d":" -f1)
+ip_address=$(echo $TARGET_URL | cut -d"/" -f3 | cut -d":" -f1)
 ping -c 3 $ip_address
 
 echo "Initializing Config File..."
