@@ -33,5 +33,5 @@ echo -e "\nGenerating Binary: bmp..."
 go build -o out/bmp-$version main/bmp/bmp.go
 chmod +x out/bmp-$version
 
-cp out/bmp-$version promoted/
+cp out/bmp-$version promoted/bmp-$version
 

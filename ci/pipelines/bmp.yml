@@ -13,7 +13,6 @@ resources:
     access_key_id:     {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
 
-resources:
 - name: bosh-softlayer-tools-artifacts
   type: s3
   source:
@@ -53,7 +52,7 @@ jobs:
 - name: bmp-promote
   plan:
   - aggregate:
-      - {trigger: false, get: version-semver, params: {bump: patch}}
+      - {trigger: false, get: version-semver, params: {bump: patch}, resource: version-semver}
 
   - get: bosh-softlayer-tools
     trigger: true
