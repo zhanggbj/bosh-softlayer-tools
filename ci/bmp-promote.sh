@@ -13,8 +13,8 @@ set -e -x
 # Creates an integer version number from the semantic version format
 # May be changed when we decide to fully use semantic versions for releases
 
-version="0.0.1"
-#echo $version > promoted/version
+version=`cat version-semver/number`
+echo $version > promoted/version
 
 echo "PWD is" $PWD
 ls -al
@@ -33,20 +33,5 @@ echo -e "\nGenerating Binary: bmp..."
 go build -o out/bmp-$version main/bmp/bmp.go
 chmod +x out/bmp-$version
 
-cp out/bmp-$version promoted/repo
-
-
-pushd promoted/repo
-  set +x
-  echo creating config/private.yml with blobstore secrets
-  cat > config/private.yml << EOF
----
-blobstore:
-  s3:
-    access_key_id: $S3_ACCESS_KEY_ID
-    secret_access_key: $S3_SECRET_ACCESS_KEY
-EOF
-  rm config/private.yml
-popd
-
+cp out/bmp-$version promoted/
 
