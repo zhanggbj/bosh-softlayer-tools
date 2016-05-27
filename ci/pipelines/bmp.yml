@@ -9,7 +9,7 @@ resources:
   type: semver
   source:
     key:               current-version
-    bucket:            {{s3__bucket}}
+    bucket:            {{s3_pipeline_bucket}}
     access_key_id:     {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
 
@@ -17,7 +17,7 @@ resources:
 - name: bosh-softlayer-tools-artifacts
   type: s3
   source:
-    regexp: bosh-softlayer-cpi\.tgz
+    regexp: bmp-*
     bucket: {{s3_bosh_softlayer_tools_bucket}}
     access_key_id: {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
@@ -59,15 +59,18 @@ jobs:
     trigger: true
     passed: [bmp-integration]
 
-  - task: integration
+#  - put: version-semver
+#      params: {file: version-semver/number}
+
+  - task: promote
     file: bosh-softlayer-tools/ci/bmp-promote.yml
     config:
       params:
         S3_ACCESS_KEY_ID: {{s3_access_key__primary}}
         S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
 
-  - put: bosh-softlayer-tools-artifacts
-      params: {from: promoted/bmp-*}
+#  - put: bosh-softlayer-tools-artifacts
+#      params: {from: promoted/bmp-*}
 
 groups:
 - name: bosh-softlayer-tools
