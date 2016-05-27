@@ -9,71 +9,70 @@ resources:
   type: semver
   source:
     key:               current-version
-    bucket:            {{s3_pipeline_bucket}}
+    bucket:            {{s3_bosh_softlayer_tools_bucket}}
     access_key_id:     {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
 
 - name: bosh-softlayer-tools-artifacts
   type: s3
   source:
-    regexp: bmp-*
     bucket: {{s3_bosh_softlayer_tools_bucket}}
     access_key_id: {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
 
 jobs:
-- name: bmp-unit
+- name: bst-unit
   public: true
   plan:
   - get: bosh-softlayer-tools
     trigger: true
 
-  - task: unit
-    file: bosh-softlayer-tools/ci/bmp-unit.yml
+  - task: bst-unit
+    file: bosh-softlayer-tools/ci/bst-unit.yml
     config:
       params:
         SL_USERNAME: fake-username
         SL_API_KEY: fake-api-key
 
-- name: bmp-integration
+- name: bst-integration
   plan:
   - get: bosh-softlayer-tools
     trigger: true
-    passed: [bmp-unit]
+    passed: [bst-unit]
 
-  - task: integration
-    file: bosh-softlayer-tools/ci/bmp-integration.yml
+  - task: bst-integration
+    file: bosh-softlayer-tools/ci/bst-integration.yml
     config:
       params:
         TARGET_URL: {{TARGET_URL}}
         BMP_USERNAME: {{BMP_USERNAME}}
         BMP_PASSWORD: {{BMP_PASSWORD}}
 
-- name: bmp-promote
+- name: bst-promote-build
   plan:
   - aggregate:
       - {trigger: false, get: version-semver, params: {bump: patch}, resource: version-semver}
 
   - get: bosh-softlayer-tools
     trigger: true
-    passed: [bmp-integration]
+    passed: [bst-integration]
 
-  - task: promote
-    file: bosh-softlayer-tools/ci/bmp-promote.yml
+  - task: bst-promote-build
+    file: bosh-softlayer-tools/ci/bst-promote.yml
     config:
       params:
         S3_ACCESS_KEY_ID: {{s3_access_key__primary}}
         S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
 
   - put: bosh-softlayer-tools-artifacts
-    params: {from: promoted/bmp-*}
+    params: {from: promoted/bosh-softlayer-tools/.*\.tar}
 
 groups:
 - name: bosh-softlayer-tools
   jobs:
-  - bmp-unit
-  - bmp-integration
-  - bmp-promote
+  - bst-unit
+  - bst-integration
+  - bst-promote
 
 
 

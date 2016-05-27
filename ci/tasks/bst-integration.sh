@@ -28,14 +28,14 @@ go clean
 echo -e "\n Formatting packages..."
 go fmt ./...
 
-echo "pwd is" $PWD
 echo -e "\n cd to base of project..."
 cd $base
-echo "pwd is" $PWD
 
 echo "Using Baremetal Server:" $TARGET_URL
-ping -c 3 10.113.189.114
+ip_address = $(echo $TARGET_URL | cut -d"/" -f3 | cut -d":" -f1)
+ping -c 3 $ip_address
 
+echo "Initializing Config File..."
 config_file="$HOME/.bmp_config"
 echo "{}" > ${config_file}
 
@@ -47,5 +47,5 @@ export DEPLOYMENT=$base/test_fixtures/bmp/deployment.yml
 echo -e "\n Vetting packages for potential issues..."
 go tool vet main common cmds integration
 
-echo -e "\n go back to last working directory"
+echo -e "\n go back to working directory"
 cd -
