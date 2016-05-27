@@ -31,8 +31,9 @@ go clean
 echo -e "\n Formatting packages..."
 go fmt ./...
 
-echo -e "\n cd to base of project..."
-cd $base
+#echo -e "\n cd to base of project..."
+#cd $base
+echo "PWD is" $PWD
 
 echo -e "\n Unit Testing packages:"
 ginkgo -r -p --noisyPendings --skipPackage=integration

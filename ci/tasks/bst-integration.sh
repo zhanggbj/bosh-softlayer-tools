@@ -41,8 +41,8 @@ echo "{}" > ${config_file}
 
 export DEPLOYMENT=$base/test_fixtures/bmp/deployment.yml
 
-#echo -e "\n Integration Testing packages:"
-#ginkgo -r -p -v --noisyPendings integration
+echo -e "\n Integration Testing packages:"
+ginkgo -r -p -v --noisyPendings integration
 
 echo -e "\n Vetting packages for potential issues..."
 go tool vet main common cmds integration
