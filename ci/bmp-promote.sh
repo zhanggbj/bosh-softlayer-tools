@@ -13,12 +13,6 @@ set -e -x
 # Creates an integer version number from the semantic version format
 # May be changed when we decide to fully use semantic versions for releases
 
-version=`cat version-semver/number`
-echo $version > promoted/version
-
-echo "PWD is" $PWD
-ls -al
-
 base=$( cd "$( dirname "$( dirname "$0" )")" && pwd )
 
 base_gopath=$( cd $base/../../../.. && pwd )
@@ -29,11 +23,14 @@ echo "GOPATH=" $GOPATH
 
 cd $base
 
+version=`cat version-semver/number`
+echo $version > promoted/version
+
+cp -r bosh-softlayer-toos promoted/repo
+
 echo -e "\nGenerating Binary: bmp..."
 go build -o out/bmp-$version main/bmp/bmp.go
 chmod +x out/bmp-$version
-ls out/
-ls promoted/
 
 mv out/bmp-$version promoted/
 
