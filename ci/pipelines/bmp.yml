@@ -58,9 +58,6 @@ jobs:
     trigger: true
     passed: [bmp-integration]
 
-#  - put: version-semver
-#      params: {file: version-semver/number}
-
   - task: promote
     file: bosh-softlayer-tools/ci/bmp-promote.yml
     config:
@@ -68,8 +65,8 @@ jobs:
         S3_ACCESS_KEY_ID: {{s3_access_key__primary}}
         S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
 
-#  - put: bosh-softlayer-tools-artifacts
-#      params: {from: promoted/bmp-*}
+  - put: bosh-softlayer-tools-artifacts
+    params: {from: promoted/bmp-*}
 
 groups:
 - name: bosh-softlayer-tools
