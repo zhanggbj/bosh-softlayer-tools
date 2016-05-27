@@ -32,6 +32,8 @@ cd $base
 echo -e "\nGenerating Binary: bmp..."
 go build -o out/bmp-$version main/bmp/bmp.go
 chmod +x out/bmp-$version
+ls out/
+ls promoted/
 
 mv out/bmp-$version promoted/
 
