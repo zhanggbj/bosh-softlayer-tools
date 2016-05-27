@@ -26,7 +26,7 @@ go build -o $base/out/sl_stemcells $base/main/stemcells/stemcells.go
 chmod +x $base/out/sl_stemcells
 
 echo -e "\nGenerating bosh-softlayer-tools"
-tar -cvf bosh-softlayer-tools-$version.tar -C $base/out/ *
+tar -cvf bosh-softlayer-tools-$version.tar -C $base/out/ $base/out/*
 
 mv $base/out/bosh-softlayer-tools-$version.tar promoted/
 
