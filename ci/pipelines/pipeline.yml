@@ -29,10 +29,6 @@ jobs:
 
   - task: bst-unit
     file: bosh-softlayer-tools/ci/tasks/bst-unit.yml
-    config:
-      params:
-        SL_USERNAME: fake-username
-        SL_API_KEY: fake-api-key
 
 - name: bst-integration
   plan:
