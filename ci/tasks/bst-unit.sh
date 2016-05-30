@@ -34,8 +34,8 @@ go fmt ./...
 echo -e "\n cd to base of project..."
 cd $base
 
-echo -e "\n Unit Testing packages:"
-ginkgo -r -p --noisyPendings --skipPackage=integration
+#echo -e "\n Unit Testing packages:"
+#ginkgo -r -p --noisyPendings --skipPackage=integration
 
 echo -e "\n Vetting packages for potential issues..."
 go tool vet main config cmds common integration
