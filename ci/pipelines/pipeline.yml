@@ -16,7 +16,7 @@ resources:
 - name: bosh-softlayer-tools-artifacts
   type: s3
   source:
-    regexp: bosh-softlayer-tools-(.*).tar
+    regexp: bosh-softlayer-tools-*.tar
     bucket: {{s3_bosh_softlayer_tools_bucket}}
     access_key_id: {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
@@ -62,7 +62,7 @@ jobs:
         S3_SECRET_ACCESS_KEY: {{s3_secret_key__primary}}
 
   - put: bosh-softlayer-tools-artifacts
-    params: {from: promoted/.*\.tar}
+    params: {from: promoted/*.tar}
 
 groups:
 - name: bosh-softlayer-tools
