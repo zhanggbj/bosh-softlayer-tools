@@ -8,7 +8,6 @@ resources:
 - name: version-semver
   type: semver
   source:
-    key:               current-version
     bucket:            {{s3_bosh_softlayer_tools_bucket}}
     access_key_id:     {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
