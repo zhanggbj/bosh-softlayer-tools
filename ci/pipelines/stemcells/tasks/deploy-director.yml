@@ -1,0 +1,30 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source: {repository: boshcpi/cpi-certification}
+
+inputs:
+  - name: bosh-src
+  - name: bosh-release
+  - name: cpi-release
+  - name: stemcell
+  - name: bosh-cli
+  - name: bosh-softlayer-tools
+
+outputs:
+  - name: director-state
+
+run:
+  path: bosh-softlayer-tools/ci/pipelines/stemcells/tasks/deploy-director.sh
+
+params:
+  BOSH_DIRECTOR_USERNAME:               ""
+  BOSH_DIRECTOR_PASSWORD:               ""
+  SL_VM_NAME_PREFIX:                    ""
+  SL_VM_DOMAIN:                         ""
+  SL_DATACENTER:                        ""
+  SL_VLAN_PUBLIC:                       ""
+  SL_VLAN_PRIVATE:                      ""
+  SL_USERNAME:                          ""
+  SL_API_KEY:                           ""

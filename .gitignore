@@ -30,3 +30,4 @@ _testmain.go
 
 # File
 credentials.yml
+ci/pipelines/stemcells/credentials-v2.yml

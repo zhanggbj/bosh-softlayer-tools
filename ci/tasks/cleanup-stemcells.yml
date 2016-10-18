@@ -3,10 +3,9 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: cloudfoundry/bosh-lite-ci
+    repository: zhanggongsw/bosh
 
 inputs:
-  - name: timer-2weeks
   - name: bosh-softlayer-tools
     path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools
 
