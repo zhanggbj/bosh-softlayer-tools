@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/zhanggbj/bosh-softlayer-tools.git
-    branch: scecurity-pipeline
+    branch: scecurity-ppl
 
 - name: version-semver
   type: semver
