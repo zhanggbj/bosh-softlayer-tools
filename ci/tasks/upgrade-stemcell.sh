@@ -25,7 +25,7 @@ export BOSH_CLIENT_SECRET=fake_secret
 echo "list vms..."
 bosh vms
 
-ls ./stemcell
+ls -al
 
 echo "upload new stemcell..."
 bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz
