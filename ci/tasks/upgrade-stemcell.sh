@@ -35,6 +35,7 @@ old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_ag
 echo "DEBUG:old_stemcell_version="$old_stemcell_version
 
 echo "upload new stemcell..."
+ls ./stemcell/
 bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
 new_stemcell_version=`ls ./stemcell|cut -d "-" -f 3`
 echo "DEBUG:new_stemcell_version="$new_stemcell_version
@@ -47,7 +48,7 @@ echo "DEBUG:new_security_version="$new_security_version
 sudo apt-get -y install expect
 set timeout 30
 /usr/bin/env expect<<EOF
-spawn ssh -o StrictHostKeyChecking=no root@bosh_client
+spawn ssh -o StrictHostKeyChecking=no root@$bosh_client
 expect "*?assword:*"
 exp_send "$bosh_client_password\r"
 sleep 5
