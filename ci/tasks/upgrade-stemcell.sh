@@ -44,19 +44,39 @@ old_security_version=`bosh releases|grep security-release| awk '{print $4}'`
 echo "DEBUG:old_security_version="$old_security_version
 new_security_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
 echo "DEBUG:new_security_version="$new_security_version
+mkdir security-release
+wget http://10.106.192.96/releases/security-release/${new_security_version}/security-release.tgz -P ./security-release/
+bosh upload release ./security-release/security-release.tgz --skip-if-exists
 
+echo "copy deployment yml..."
 sudo apt-get -y install expect
 set timeout 30
+deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
 /usr/bin/env expect<<EOF
-spawn ssh -o StrictHostKeyChecking=no root@$bosh_cli
+spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/v1/${deployment_yml} ./
 expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
-sleep 5
-send "sed -i '/stemcell_version=/s/$/stemcell_verion=$new_stemcell_version/' /root/v1/gen-cf-release-public-spruce-template-ppl.yml\r"
-sleep 3
-send "sed -i '/security-release.tgz/n;N;N;s/${old_security_version}/$new_stemcell_version/' /root/v1/gen-cf-release-public-spruce-template-ppl.yml\r"
 expect eof
 EOF
 
+echo "Update deployment yml..."
+sed -i '/stemcell_version=/s/${old_stemcell_version}/${new_stemcell_version}/' /root/v1/${deployment_yml}
+sleep 3
+sed -i '/security-release.tgz/n;N;N;s/${old_security_version}/${new_security_version}/' /root/v1/${deployment_yml}
+
+echo "backup deployment yml..."
+/usr/bin/env expect<<EOF
+spawn scp -o StrictHostKeyChecking=no -r ./${deployment_yml} root@$bosh_cli:/v1/
+expect "*?assword:*"
+exp_send "$bosh_cli_password\r"
+expect eof
+EOF
+
+echo "set deployment..."
+bosh deployment ${deployment_yml}
+
 echo "upgrade stemcell and security-release..."
 echo "yes" | bosh deploy
+
+echo "DEBUG: bosh deploy result="$?
+bosh tasks
