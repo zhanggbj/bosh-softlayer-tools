@@ -29,15 +29,15 @@ echo "list stemcells"
 bosh stemcells
 
 echo "update stemcell version..."
-bosh_client=${BOSH_CLIENT}
-bosh_client_password=${BOSH_CLIENT_PASSWORD}
+bosh_cli=${BOSH_CLI}
+bosh_cli_password=${BOSH_CLI_PASSWORD}
 old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
 echo "DEBUG:old_stemcell_version="$old_stemcell_version
 
 echo "upload new stemcell..."
 ls ./stemcell/
 bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
-new_stemcell_version=`ls ./stemcell|cut -d "-" -f 3`
+new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 3`
 echo "DEBUG:new_stemcell_version="$new_stemcell_version
 
 old_security_version=`bosh releases|grep security-release| awk '{print $4}'`
@@ -48,9 +48,9 @@ echo "DEBUG:new_security_version="$new_security_version
 sudo apt-get -y install expect
 set timeout 30
 /usr/bin/env expect<<EOF
-spawn ssh -o StrictHostKeyChecking=no root@$bosh_client
+spawn ssh -o StrictHostKeyChecking=no root@$bosh_cli
 expect "*?assword:*"
-exp_send "$bosh_client_password\r"
+exp_send "$bosh_cli_password\r"
 sleep 5
 send "sed -i '/stemcell_version=/s/$/stemcell_verion=$new_stemcell_version/' /root/v1/gen-cf-release-public-spruce-template-ppl.yml\r"
 sleep 3
