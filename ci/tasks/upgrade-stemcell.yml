@@ -3,6 +3,7 @@ platform: linux
 image: docker:///cloudfoundry/bosh-lite-ci
 
 inputs:
+  - name: stemcell
   - name: bosh-softlayer-tools
     path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools
 
