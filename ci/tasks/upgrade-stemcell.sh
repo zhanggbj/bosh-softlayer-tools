@@ -35,7 +35,7 @@ old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_ag
 echo "DEBUG:old_stemcell_version="$old_stemcell_version
 
 echo "upload new stemcell..."
-bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz
+bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
 new_stemcell_version=`ls ./stemcell|cut -d "-" -f 3`
 echo "DEBUG:new_stemcell_version="$new_stemcell_version
 
