@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/zhanggbj/bosh-softlayer-tools.git
-    branch: scecurity-ppl
+    branch: security-ppl
 
 - name: version-semver
   type: semver
@@ -33,9 +33,9 @@ jobs:
 - name: upgrade-stemcell
   public: true
   plan:
-  - get: stemcell
-    resource: light-stemcell
-    trigger: true
+  - aggregate:
+      - {trigger: true, get: stemcell, resource: light-stemcell}
+      - {trigger: false, get: bosh-softlayer-tools, resource: bosh-softlayer-tools}
 
   - task: upgrade-stemcell
     file: bosh-softlayer-tools/ci/tasks/upgrade-stemcell.yml

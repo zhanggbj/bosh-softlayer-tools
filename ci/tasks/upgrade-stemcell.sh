@@ -19,6 +19,9 @@ echo "login director..."
 bosh -n target ${BLUEMIX_DIRECTOR_IP}
 bosh login admin admin
 
+export BOSH_CLIENT=fake_client
+export BOSH_CLIENT_SECRET=fake_secret
+
 echo "list vms..."
 bosh vms
 
