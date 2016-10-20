@@ -37,7 +37,7 @@ echo "DEBUG:old_stemcell_version="$old_stemcell_version
 echo "upload new stemcell..."
 ls ./stemcell/
 bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
-new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 3`
+new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 4`
 echo "DEBUG:new_stemcell_version="$new_stemcell_version
 
 old_security_version=`bosh releases|grep security-release| awk '{print $4}'`

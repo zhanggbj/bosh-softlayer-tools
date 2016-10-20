@@ -42,8 +42,8 @@ jobs:
     config:
       params:
         BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
-        BOSH_CLIENT: {{bosh_cli}}
-        BOSH_CLIENT_PASSWORD: {{bosh_cli_password}}
+        BOSH_CLI: {{bosh_cli}}
+        BOSH_CLI_PASSWORD: {{bosh_cli_password}}
 
 #- name: bst-integration
 #  plan:
