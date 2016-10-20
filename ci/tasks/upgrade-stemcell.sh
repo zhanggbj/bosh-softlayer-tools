@@ -46,7 +46,8 @@ new_security_version=`curl http://10.106.192.96/releases/security-release/|tail 
 echo "DEBUG:new_security_version="$new_security_version
 mkdir security-release
 wget http://10.106.192.96/releases/security-release/${new_security_version}/security-release.tgz -P ./security-release/
-bosh upload release ./security-release/security-release.tgz --skip-if-exists
+#for DEBUG
+#bosh upload release ./security-release/security-release.tgz --skip-if-exists
 
 echo "copy deployment yml..."
 sudo apt-get -y install expect
