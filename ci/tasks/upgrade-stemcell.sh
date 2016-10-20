@@ -61,13 +61,13 @@ expect eof
 EOF
 
 echo "Update deployment yml..."
-sed -i '/stemcell_version=/s/${old_stemcell_version}/${new_stemcell_version}/' /root/v1/${deployment_yml}
+sed -i '/stemcell_version=/s/${old_stemcell_version}/${new_stemcell_version}/' ./${deployment_yml}
 sleep 3
-sed -i '/security-release.tgz/n;N;N;s/${old_security_version}/${new_security_version}/' /root/v1/${deployment_yml}
+sed -i '/security-release.tgz/n;N;N;s/${old_security_version}/${new_security_version}/' ./${deployment_yml}
 
 echo "backup deployment yml..."
 /usr/bin/env expect<<EOF
-spawn scp -o StrictHostKeyChecking=no -r ./${deployment_yml} root@$bosh_cli:/v1/
+spawn scp -o StrictHostKeyChecking=no -r ./${deployment_yml} root@$bosh_cli:/root/v1/
 expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
 expect eof
