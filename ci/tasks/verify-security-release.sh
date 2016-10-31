@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
+set -e
 
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
 echo "copy scripts..."
-scripts="run.sh run.user.expect test-component.sh"
+scripts="run.sh,run.user.expect,test-component.sh"
 sudo apt-get -y install expect
 set timeout 10
 /usr/bin/env expect<<EOF
-spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/root/security/${scripts} ./
+spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/root/security/\{${scripts}\} ./
 expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
 expect eof
@@ -37,7 +38,7 @@ fi
 echo "collect VM ip addresses..."
 bosh vms|awk '/running/{print $11}' > ipaddr.csv
 run_log="run.log"
-echo "run test-component.sh on all VMs"
+echo "run test-component.sh on all VMs..."
 ./run.sh -s test-component.sh -i ipaddr.csv -p Paa54futur3 -a | tee $run_log
 sleep 3
 
