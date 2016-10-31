@@ -8,7 +8,7 @@ go version
 go get -t -v  github.com/onsi/ginkgo/ginkgo
 export GOPATH=$base_gopath:$GOPATH
 echo "GOPATH=" $GOPATH
-
+divider="======================================================"
 echo "installing bosh CLI"
 gem install bosh_cli --no-ri --no-rdo c
 
@@ -61,9 +61,9 @@ expect eof
 EOF
 
 echo "Update deployment yml..."
-sed -i '/stemcell_version=/n;s/${old_stemcell_version}/${new_stemcell_version}/' ./${deployment_yml}
+sed -i '/stemcell_version=/ s/${old_stemcell_version}/${new_stemcell_version}/' ./${deployment_yml}
 sleep 3
-sed -i '/security-release.tgz/n;N;N;s/${old_security_version}/${new_security_version}/' ./${deployment_yml}
+sed -i '/security-release.tgz/ n;N;N;s/${old_security_version}/${new_security_version}/' ./${deployment_yml}
 
 echo "backup deployment yml..."
 /usr/bin/env expect<<EOF
@@ -76,8 +76,8 @@ EOF
 echo "set deployment..."
 bosh deployment ${deployment_yml}
 
-echo "upgrade stemcell and security-release..."
-echo "yes" | bosh deploy
+# for DEBUG
+#echo "upgrade stemcell and security-release..."
+#echo "yes" | bosh deploy
 
 echo "DEBUG: bosh deploy result="$?
-bosh tasks

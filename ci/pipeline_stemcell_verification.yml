@@ -45,6 +45,18 @@ jobs:
         BOSH_CLI: {{bosh_cli}}
         BOSH_CLI_PASSWORD: {{bosh_cli_password}}
 
+- name: verify-security-release
+  public: true
+  plan:
+  - aggregate:
+      - {trigger: false, get: bosh-softlayer-tools, resource: bosh-softlayer-tools}
+
+  - task: verify-security-release
+    file: bosh-softlayer-tools/ci/tasks/verify-security-release.yml
+    config:
+      params:
+        BOSH_CLI: {{bosh_cli}}
+        BOSH_CLI_PASSWORD: {{bosh_cli_password}}
 #- name: bst-integration
 #  plan:
 #  - get: bosh-softlayer-tools
