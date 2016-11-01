@@ -40,7 +40,7 @@ bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
 new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 4`
 echo "DEBUG:new_stemcell_version="$new_stemcell_version
 
-old_security_version=`bosh releases|grep security-release| awk '{print $4}'`
+old_security_version=`bosh releases|grep security-release| awk '{print $4}'|sed 's/\*//g'`
 echo "DEBUG:old_security_version="$old_security_version
 new_security_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
 echo "DEBUG:new_security_version="$new_security_version
