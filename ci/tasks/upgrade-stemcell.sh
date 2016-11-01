@@ -45,16 +45,16 @@ echo "DEBUG:old_security_version="$old_security_version
 new_security_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
 echo "DEBUG:new_security_version="$new_security_version
 #for DEBUG
-#mkdir security-release
-#wget http://10.106.192.96/releases/security-release/${new_security_version}/security-release.tgz -P ./security-release/
-#bosh upload release ./security-release/security-release.tgz --skip-if-exists
+mkdir security-release
+wget http://10.106.192.96/releases/security-release/${new_security_version}/security-release.tgz -P ./security-release/
+bosh upload release ./security-release/security-release.tgz --skip-if-exists
 
 echo "copy deployment yml..."
 sudo apt-get -y install expect
 set timeout 30
 deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
 /usr/bin/env expect<<EOF
-spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/root/v1/${deployment_yml} ./
+spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/root/security/${deployment_yml} ./
 expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
 expect eof
@@ -67,7 +67,7 @@ sed -i '/security-release.tgz/ n;N;N;s/${old_security_version}/${new_security_ve
 
 echo "backup deployment yml..."
 /usr/bin/env expect<<EOF
-spawn scp -o StrictHostKeyChecking=no -r ./${deployment_yml} root@$bosh_cli:/root/v1/
+spawn scp -o StrictHostKeyChecking=no -r ./${deployment_yml} root@$bosh_cli:/root/security/
 expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
 expect eof

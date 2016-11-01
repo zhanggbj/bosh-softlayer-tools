@@ -55,6 +55,7 @@ jobs:
     file: bosh-softlayer-tools/ci/tasks/verify-security-release.yml
     config:
       params:
+        BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
         BOSH_CLI: {{bosh_cli}}
         BOSH_CLI_PASSWORD: {{bosh_cli_password}}
 
