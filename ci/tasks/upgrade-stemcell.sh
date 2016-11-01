@@ -61,9 +61,9 @@ expect eof
 EOF
 
 echo "Update deployment yml..."
-sed -i '/stemcell_version=/ s/${old_stemcell_version}/${new_stemcell_version}/' ./${deployment_yml}
+sed -i '/stemcell_version=/ s/'"$old_stemcell_version"'/'"$new_stemcell_version"'/' ./${deployment_yml}
 sleep 3
-sed -i '/security-release.tgz/ n;N;N;s/${old_security_version}/${new_security_version}/' ./${deployment_yml}
+sed -i '/security-release.tgz/ n;N;N;s/'"$old_security_version"'/'"$new_security_version"'/' ./${deployment_yml}
 
 echo "backup deployment yml..."
 /usr/bin/env expect<<EOF
