@@ -27,12 +27,12 @@ bosh login admin admin
 export BOSH_CLIENT=fake_client
 export BOSH_CLIENT_SECRET=fake_secret
 
-#security_release_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
-#echo "DEBUG security_release_version is"${security_release_version}
-old_security_version=`bosh releases|grep security-release| awk '{print $4}'|sed 's/\*//g'`
-echo "DEBUG:old_security_version="$old_security_version
+security_release_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
+echo "DEBUG security_release_version is"${security_release_version}
+#old_security_version=`bosh releases|grep security-release| awk '{print $4}'|sed 's/\*//g'`
+#echo "DEBUG:old_security_version="$old_security_version
 echo "verify security release version..."
-bosh deployments | grep security-release/${old_security_version}
+bosh deployments | grep security-release/${security_release_version}
 if [ $? -ne 0 ]; then
   echo "security release version is not correct"
   exit 1

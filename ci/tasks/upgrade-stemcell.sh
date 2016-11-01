@@ -77,7 +77,9 @@ echo "set deployment..."
 bosh deployment ${deployment_yml}
 
 # for DEBUG
-#echo "upgrade stemcell and security-release..."
-#echo "yes" | bosh deploy
+echo "upgrade stemcell and security-release..."
+echo "yes" | bosh deploy
 
-echo "DEBUG: bosh deploy result="$?
+if [ $? -eq 0 ]; then
+   echo "Upgrade stemcell and security release successful!"
+fi
