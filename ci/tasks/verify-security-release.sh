@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+source bosh-softlayer-tools/ci/tasks/utils.sh
 
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
