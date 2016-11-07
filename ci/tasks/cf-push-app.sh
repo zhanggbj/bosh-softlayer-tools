@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e -x
-source bosh-softlayer-tools/ci/tasks/utils.sh
+
+dir=`dirname "$0"`
+source ${dir}/utils.sh
+
 print_title INSTALL CF CLI...
 curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -zx
 mv cf /usr/local/bin

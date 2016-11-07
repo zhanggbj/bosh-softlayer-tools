@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
-source bosh-softlayer-tools/ci/tasks/utils.sh
+set -e -x
+
+dir=`dirname "$0"`
+source ${dir}/utils.sh
 
 base=$( cd "$( dirname "$( dirname "$0" )")"/.. && pwd )
 base_gopath=$( cd $base/../../../.. && pwd )
