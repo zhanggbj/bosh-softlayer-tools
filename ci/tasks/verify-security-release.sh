@@ -3,7 +3,7 @@ set -e
 
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
-#echo "copy scripts..."
+echo "copy scripts..."
 #scripts="run.sh,run.user.expect,test-component.sh"
 #sudo apt-get -y install expect
 #set timeout 10

@@ -5,9 +5,9 @@ set -e
 base=$( cd "$( dirname "$( dirname "$0" )")"/.. && pwd )
 base_gopath=$( cd $base/../../../.. && pwd )
 go version
-#go get -t -v  github.com/onsi/ginkgo/ginkgo
-#export GOPATH=$base_gopath:$GOPATH
-#echo "GOPATH=" $GOPATH
+go get -t -v  github.com/onsi/ginkgo/ginkgo
+export GOPATH=$base_gopath:$GOPATH
+echo "GOPATH=" $GOPATH
 #divider="======================================================"
 #echo "installing bosh CLI"
 #gem install bosh_cli --no-ri --no-rdo c
