@@ -8,3 +8,9 @@ inputs:
 
 run:
   path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools/ci/tasks/cf-push-app.sh
+
+params:
+  CF-API:                 replace-me
+  CF-USERNAME:            replace-me
+  CF-PASSWORD:            replace-me
+  APP-API:                replace-me
