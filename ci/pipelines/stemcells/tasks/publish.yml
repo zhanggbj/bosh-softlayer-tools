@@ -7,7 +7,6 @@ image_resource:
     repository: boshcpi/aws-cpi-release
 
 inputs:
-  - name: bosh-src
   - name: bosh-softlayer-tools
   - name: version
 

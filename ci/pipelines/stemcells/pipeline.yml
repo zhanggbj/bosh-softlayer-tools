@@ -91,6 +91,9 @@ jobs:
         - get: bosh-release
         - get: cpi-release
         - get: light-stemcell
+          trigger: true
+          passed:
+            - create-light-stemcell
 
       - do:
         - task: deploy-director
@@ -129,10 +132,10 @@ jobs:
     plan:
       - aggregate:
         - get: version
+          trigger: true
           passed:
             - test-stemcells
             - bats-ubuntu
-        - get: bosh-src
         - get: bosh-softlayer-tools
       - task: copy-artifacts
         file: bosh-softlayer-tools/ci/pipelines/stemcells/tasks/publish.yml
@@ -142,7 +145,7 @@ jobs:
           CANDIDATE_BUCKET_NAME: {{candidate_stemcell_bucket}}
           PUBLISHED_BUCKET_NAME: {{published_stemcell_bucket}}
           COPY_KEYS: |
-            softlayer/light-bosh-stemcell-%s-softlayer-xen-ubuntu-trusty-go_agent.tgz
+            light-bosh-stemcell-%s-softlayer-xen-ubuntu-trusty-go_agent.tgz
   #
   # SoftLayer
   #
@@ -245,11 +248,13 @@ jobs:
         - get: stemcell
           trigger: true
           resource: light-stemcell
+          passed:
+            - create-light-stemcell
         - get: pipelines
         - get: bosh-cli
         - get: bats
-        - get: bosh-src
         - get: version
+          trigger: true
           passed:
             - create-light-stemcell
 

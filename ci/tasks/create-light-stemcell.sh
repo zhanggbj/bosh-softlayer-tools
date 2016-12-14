@@ -23,14 +23,14 @@
 
   cp *.tgz "${base_gopath}/../${output_dir}/"
 
-#  stemcell_filename=`ls light*.tgz`
-#
-#  checksum="$(sha1sum "${base_gopath}/../${output_dir}/${stemcell_filename}" | awk '{print $1}')"
-#  echo "$stemcell_filename sha1=$checksum"
-#  if [ -n "${BOSHIO_TOKEN}" ]; then
-#    curl -X POST \
-#        --fail \
-#        -d "sha1=${checksum}" \
-#        -H "Authorization: bearer ${BOSHIO_TOKEN}" \
-#        "https://bosh.io/checksums/${stemcell_filename}"
-#  fi
+  stemcell_filename=`ls light*.tgz`
+
+  checksum="$(sha1sum "${base_gopath}/../${output_dir}/${stemcell_filename}" | awk '{print $1}')"
+  echo "$stemcell_filename sha1=$checksum"
+  if [ -n "${BOSHIO_TOKEN}" ]; then
+    curl -X POST \
+        --fail \
+        -d "sha1=${checksum}" \
+        -H "Authorization: bearer ${BOSHIO_TOKEN}" \
+        "https://bosh.io/checksums/${stemcell_filename}"
+  fi
