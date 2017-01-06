@@ -28,7 +28,7 @@ update_deployment_yml
 
 #bosh_deploy
 
-func get_old_new_versions (){
+function get_old_new_versions (){
   print_title "GET OLD AND NEW VERSIONS OF STEMCELL/SECURITY RELEASE..."
   old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
   new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 4`
@@ -38,7 +38,7 @@ func get_old_new_versions (){
   new_security_version=`grep ^v[0-9]\.[1-9]\-[0-9]\*\$ tmp.file | tail -n 1`
 }
 
-func upload_releases (){
+function upload_releases (){
   print_title "UPLOAD STEMCELL AND SECURITY RELEASE..."
   bosh upload stemcell ./stemcell/light-bosh-stemcell-*.tgz --skip-if-exists
   mkdir security-release
@@ -46,7 +46,7 @@ func upload_releases (){
   bosh upload release ./security-release/security-release.tgz --skip-if-exists
 }
 
-func update_deployment_yml (){
+function update_deployment_yml (){
   print_title "UPDATE DEPLOYMENT YML..."
   sudo apt-get -y install expect
   set timeout 30
@@ -62,7 +62,7 @@ EOF
   sed -i '/security-release.tgz/ n;N;N;s/'"$old_security_version"'/'"$new_security_version"'/' ./${deployment_yml}
 }
 
-func bosh_deploy (){
+function bosh_deploy (){
   print_title "DEPLOY..."
   bosh deployment ${deployment_yml}
   echo "yes" | bosh deploy

@@ -18,7 +18,7 @@ verify_security_release_version
 
 verify_security_release_on_vm
 
-func prepare_scripts (){
+function prepare_scripts (){
 print_title "PREPARE SCRIPTS..."
 scripts="run.sh,run.user.expect,test-component.sh"
 sudo apt-get -y install expect
@@ -31,7 +31,7 @@ expect eof
 EOF
 }
 
-func verify_security_release_version (){
+function verify_security_release_version (){
 print_title "VERIFY SECURITY RELEASE VERSION..."
 security_release_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
 echo "DEBUG security_release_version is"${security_release_version}
@@ -44,7 +44,7 @@ if [ $? -ne 0 ]; then
 fi
 }
 
-func verify_security_release_on_vm (){
+function verify_security_release_on_vm (){
 print_title "VERIFY SECURITY RELEASE ON VM..."
 echo "collect all VM ip addresses..."
 bosh vms|awk '/running/{print $11}' > ipaddr.csv

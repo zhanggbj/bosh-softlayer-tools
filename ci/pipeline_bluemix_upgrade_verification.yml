@@ -3,23 +3,23 @@ resources:
   type: git
   source:
     uri: https://github.com/zhanggbj/bosh-softlayer-tools.git
-    branch: security-ppl
+    branch: WIP-security-ppl
 
-- name: version-semver
-  type: semver
-  source:
-    key:               current-version
-    bucket:            {{s3_bosh_softlayer_tools_bucket}}
-    access_key_id:     {{s3-access-key-id}}
-    secret_access_key: {{s3-secret-access-key}}
+#- name: version-semver
+#  type: semver
+#  source:
+#    key:               current-version
+#    bucket:            {{s3_bosh_softlayer_tools_bucket}}
+#    access_key_id:     {{s3-access-key-id}}
+#    secret_access_key: {{s3-secret-access-key}}
 
-- name: bosh-softlayer-tools-artifacts
-  type: s3
-  source:
-    regexp: bosh-softlayer-tools-([0-9.]+)\.tgz
-    bucket: {{s3_bosh_softlayer_tools_bucket}}
-    access_key_id: {{s3-access-key-id}}
-    secret_access_key: {{s3-secret-access-key}}
+#- name: bosh-softlayer-tools-artifacts
+#  type: s3
+#  source:
+#    regexp: bosh-softlayer-tools-([0-9.]+)\.tgz
+#    bucket: {{s3_bosh_softlayer_tools_bucket}}
+#    access_key_id: {{s3-access-key-id}}
+#    secret_access_key: {{s3-secret-access-key}}
 
 - name: light-stemcell
   type: s3

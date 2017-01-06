@@ -41,7 +41,7 @@ function print_title (){
   echo ${divider}
 }
 
-func install_bosh_cli (){
+function install_bosh_cli (){
   print_title "INSTALL BOSH CLI..."
   gem install bosh_cli --no-ri --no-rdo c
 
