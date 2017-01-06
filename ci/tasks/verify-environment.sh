@@ -10,8 +10,9 @@ mv cf /usr/local/bin
 echo "cf version..."
 cf --version
 
+name_server={NAME_SERVER}
 print_title "CF PUSH APP..."
-sed -i '1 i\nameserver 10.113.205.104' /etc/resolv.conf
+sed -i '1 i\nameserver '"${name_server}"'' /etc/resolv.conf
 CF_TRACE=true cf api ${CF-API}
 CF_TRACE=true cf login -u ${CF-USERNAME} -p ${CF-PASSWORD}
 base=`dirname "$0"`

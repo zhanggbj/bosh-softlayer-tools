@@ -4,10 +4,22 @@ set -e
 dir=`dirname "$0"`
 source ${dir}/utils.sh
 
-print_title "PREPARE SCRIPTS..."
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
-echo "copy scripts..."
+
+install_bosh_cli
+echo "login director..."
+bosh -n target ${BLUEMIX_DIRECTOR_IP}
+bosh login admin admin
+
+prepare_scripts
+
+verify_security_release_version
+
+verify_security_release_on_vm
+
+func prepare_scripts (){
+print_title "PREPARE SCRIPTS..."
 scripts="run.sh,run.user.expect,test-component.sh"
 sudo apt-get -y install expect
 set timeout 10
@@ -17,22 +29,10 @@ expect "*?assword:*"
 exp_send "$bosh_cli_password\r"
 expect eof
 EOF
-ls ./
+}
 
-print_title "INSTALL BOSH CLI..."
-gem install bosh_cli --no-ri --no-rdo c
-
-echo "using bosh CLI version..."
-bosh version
-
-echo "login director..."
-bosh -n target ${BLUEMIX_DIRECTOR_IP}
-bosh login admin admin
-
-export BOSH_CLIENT=fake_client
-export BOSH_CLIENT_SECRET=fake_secret
-
-print_title "VERIFY SECURITY RELEASE..."
+func verify_security_release_version (){
+print_title "VERIFY SECURITY RELEASE VERSION..."
 security_release_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
 echo "DEBUG security_release_version is"${security_release_version}
 
@@ -42,7 +42,10 @@ if [ $? -ne 0 ]; then
   echo "security release version is not correct"
   exit 1
 fi
+}
 
+func verify_security_release_on_vm (){
+print_title "VERIFY SECURITY RELEASE ON VM..."
 echo "collect all VM ip addresses..."
 bosh vms|awk '/running/{print $11}' > ipaddr.csv
 run_log="run.log"
@@ -66,3 +69,4 @@ fi
 
 print_title "SECURITY RELEASE VERIFICATION DETAILs..."
 cat $run_log
+}
