@@ -11,23 +11,6 @@ source ${dir}/utils.sh
 #export GOPATH=$base_gopath:$GOPATH
 #echo "GOPATH=" $GOPATH
 
-deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
-bosh_cli=${BOSH_CLI}
-bosh_cli_password=${BOSH_CLI_PASSWORD}
-
-install_bosh_cli
-echo "login director..."
-bosh -n target ${BLUEMIX_DIRECTOR_IP}
-bosh login admin admin
-
-get_old_new_versions
-
-upload_releases
-
-update_deployment_yml
-
-#bosh_deploy
-
 function get_old_new_versions (){
   print_title "GET OLD AND NEW VERSIONS OF STEMCELL/SECURITY RELEASE..."
   old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
@@ -73,3 +56,20 @@ function bosh_deploy (){
      echo "Deploy failed!"
   fi
 }
+
+deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
+bosh_cli=${BOSH_CLI}
+bosh_cli_password=${BOSH_CLI_PASSWORD}
+
+install_bosh_cli
+echo "login director..."
+bosh -n target ${BLUEMIX_DIRECTOR_IP}
+bosh login admin admin
+
+get_old_new_versions
+
+upload_releases
+
+update_deployment_yml
+
+#bosh_deploy ()
