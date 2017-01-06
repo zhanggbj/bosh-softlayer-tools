@@ -7,17 +7,6 @@ source ${dir}/utils.sh
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
 
-install_bosh_cli
-echo "login director..."
-bosh -n target ${BLUEMIX_DIRECTOR_IP}
-bosh login admin admin
-
-prepare_scripts
-
-verify_security_release_version
-
-verify_security_release_on_vm
-
 function prepare_scripts (){
 print_title "PREPARE SCRIPTS..."
 scripts="run.sh,run.user.expect,test-component.sh"
@@ -70,3 +59,14 @@ fi
 print_title "SECURITY RELEASE VERIFICATION DETAILs..."
 cat $run_log
 }
+
+install_bosh_cli
+echo "login director..."
+bosh -n target ${BLUEMIX_DIRECTOR_IP}
+bosh login admin admin
+
+prepare_scripts
+
+verify_security_release_version
+
+verify_security_release_on_vm

@@ -44,12 +44,12 @@ jobs:
         BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
         BOSH_CLI: {{bosh_cli}}
         BOSH_CLI_PASSWORD: {{bosh_cli_password}}
-#    on_success:
-#        task: update-environment
-#        file: bosh-softlayer-tools/ci/tasks/post-upgrade.yml
-#    on_failure:
-#        task: cleanup-environment
-#        file: bosh-softlayer-tools/ci/tasks/restore-environment.yml
+    on_success:
+        task: update-environment
+        file: bosh-softlayer-tools/ci/tasks/post-upgrade.yml
+    on_failure:
+        task: cleanup-environment
+        file: bosh-softlayer-tools/ci/tasks/restore-environment.yml
 
 - name: verify-security-release
   public: true
