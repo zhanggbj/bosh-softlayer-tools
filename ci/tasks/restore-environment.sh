@@ -22,4 +22,6 @@ exp_send "$bosh_cli_password\r"
 expect eof
 EOF
 
-bosh_deploy
+#bosh_deploy
+#debuging
+bosh stemcells

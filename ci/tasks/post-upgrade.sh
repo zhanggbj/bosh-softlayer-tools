@@ -9,6 +9,7 @@ deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
 install_bosh_cli
+echo "login director..."
 bosh -n target ${BLUEMIX_DIRECTOR_IP}
 bosh login admin admin
 
@@ -22,7 +23,7 @@ expect eof
 EOF
 
 echo "get old versions"
-old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'`
+old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|head -n 1`
 old_security_version=`bosh releases|grep security-release| awk '{print $4}'`
 
 echo "debugging..."$old_stemcell_version
