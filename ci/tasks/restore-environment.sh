@@ -13,6 +13,7 @@ echo "login director..."
 bosh -n target ${BLUEMIX_DIRECTOR_IP}
 bosh login admin admin
 
+sudo apt-get -y install expect
 set timeout 30
 /usr/bin/env expect<<EOF
 spawn scp -o StrictHostKeyChecking=no root@$bosh_cli:/root/security/${deployment_yml} ./
