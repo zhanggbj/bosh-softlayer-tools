@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -ex
 
+dir=`dirname "$0"`
+source ${dir}/utils.sh
+
 deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
 
 bosh_cli=${BOSH_CLI}
