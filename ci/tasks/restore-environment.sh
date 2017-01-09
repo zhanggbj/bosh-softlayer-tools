@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -ex
 
 dir=`dirname "$0"`
-source ${dir}/upgrade-environment.sh
 source ${dir}/utils.sh
 
 deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
@@ -22,6 +21,18 @@ exp_send "$bosh_cli_password\r"
 expect eof
 EOF
 
-#bosh_deploy
+#restore
 #debuging
-bosh stemcells
+
+echo "debuging...restore"
+function restore (){
+  print_title "DEPLOY..."
+  bosh deployment ${deployment_yml}
+  echo "yes" | bosh deploy
+
+  if [ $? -eq 0 ]; then
+     echo "Restore successful!"
+  else
+     echo "Restore failed!"
+  fi
+}
