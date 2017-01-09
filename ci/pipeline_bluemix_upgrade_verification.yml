@@ -41,15 +41,28 @@ jobs:
     file: bosh-softlayer-tools/ci/tasks/upgrade-environment.yml
     config:
       params:
+        DEPLOYMENT_YML: {{deployment_yml}}
         BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
         BOSH_CLI: {{bosh_cli}}
         BOSH_CLI_PASSWORD: {{bosh_cli_password}}
     on_success:
         task: post-upgrade
         file: bosh-softlayer-tools/ci/tasks/post-upgrade.yml
+        config:
+          params:
+            DEPLOYMENT_YML: {{deployment_yml}}
+            BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
+            BOSH_CLI: {{bosh_cli}}
+            BOSH_CLI_PASSWORD: {{bosh_cli_password}}
     on_failure:
         task: restore-environment
         file: bosh-softlayer-tools/ci/tasks/restore-environment.yml
+        config:
+          params:
+            DEPLOYMENT_YML: {{deployment_yml}}
+            BLUEMIX_DIRECTOR_IP: {{bluemix_director_ip}}
+            BOSH_CLI: {{bosh_cli}}
+            BOSH_CLI_PASSWORD: {{bosh_cli_password}}
 
 - name: verify-security-release
   public: true

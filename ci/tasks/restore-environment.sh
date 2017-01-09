@@ -4,8 +4,6 @@ set -ex
 dir=`dirname "$0"`
 source ${dir}/utils.sh
 
-deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
-
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
 install_bosh_cli
@@ -22,12 +20,10 @@ exp_send "$bosh_cli_password\r"
 expect eof
 EOF
 
-#restore
-#debuging
+deployment_yml=${DEPLOYMENT_YML}
 
-echo "debuging...restore"
 function restore (){
-  print_title "DEPLOY..."
+  print_title "RESTORING..."
   bosh deployment ${deployment_yml}
   echo "yes" | bosh deploy
 

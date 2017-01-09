@@ -22,7 +22,9 @@ EOF
 
 function verify_security_release_version (){
 print_title "VERIFY SECURITY RELEASE VERSION..."
-security_release_version=`curl http://10.106.192.96/releases/security-release/|tail -n 3|head -n 1|cut -d '"' -f 2|sed 's/\///g'`
+old_security_version=`bosh releases|grep security-release| awk '{print $4}'|sed 's/\*//g'`
+curl http://10.106.192.96/releases/security-release/|grep href|cut -d '"' -f 2|sed 's/\///g' > tmp.file
+security_release_version=`grep ^v[0-9]\.[1-9]\-[0-9]\*\$ tmp.file | tail -n 1`
 echo "DEBUG security_release_version is"${security_release_version}
 
 echo "verify security release version..."
@@ -56,7 +58,7 @@ else
   exit 1
 fi
 
-print_title "SECURITY RELEASE VERIFICATION DETAILs..."
+print_title "SECURITY RELEASE VERIFICATION DETAILS..."
 cat $run_log
 }
 

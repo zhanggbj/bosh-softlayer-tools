@@ -5,12 +5,6 @@ set -ex
 dir=`dirname "$0"`
 source ${dir}/utils.sh
 
-#base=$( cd "$( dirname "$( dirname "$0" )")"/.. && pwd )
-#base_gopath=$( cd $base/../../../.. && pwd )
-#go version
-#export GOPATH=$base_gopath:$GOPATH
-#echo "GOPATH=" $GOPATH
-
 function get_old_new_versions (){
   print_title "GET OLD AND NEW VERSIONS OF STEMCELL/SECURITY RELEASE..."
   old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
@@ -57,9 +51,9 @@ function bosh_deploy (){
   fi
 }
 
-deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
+deployment_yml=${DEPLOYMENT_YML}
 
 install_bosh_cli
 echo "login director..."
@@ -72,4 +66,4 @@ upload_releases
 
 update_deployment_yml
 
-#bosh_deploy ()
+bosh_deploy

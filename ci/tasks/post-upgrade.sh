@@ -4,7 +4,7 @@ set -ex
 dir=`dirname "$0"`
 source ${dir}/utils.sh
 
-deployment_yml="gen-cf-release-public-spruce-template-ppl.yml"
+deployment_yml=${DEPLOYMENT_YML}
 
 bosh_cli=${BOSH_CLI}
 bosh_cli_password=${BOSH_CLI_PASSWORD}
