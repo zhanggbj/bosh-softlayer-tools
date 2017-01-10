@@ -11,7 +11,7 @@ deployment_yml=${DEPLOYMENT_YML}
 
 function get_old_new_versions (){
   print_title "GET OLD AND NEW VERSIONS OF STEMCELL/SECURITY RELEASE..."
-  old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
+  old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|grep '\*'|sed 's/\*//g'`
   new_stemcell_version=`ls ./stemcell|grep light-bosh-stemcell| cut -d "-" -f 4`
 
   old_security_version=`bosh releases|grep security-release| awk '{print $4}'|sed 's/\*//g'`

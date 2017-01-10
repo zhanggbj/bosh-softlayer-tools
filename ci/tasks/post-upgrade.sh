@@ -25,8 +25,3 @@ EOF
 echo "get old versions"
 old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|head -n 1`
 old_security_version=`bosh releases|grep security-release| awk '{print $4}'`
-
-echo "debugging..."$old_stemcell_version
-echo "debugging..."$old_security_version
-#echo yes | bosh delete release security-release $old_security_version
-#echo yes | bosh delete stemcell bosh-softlayer-xen-ubuntu-trusty-go_agent $old_stemcell_version
