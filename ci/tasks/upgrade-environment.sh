@@ -5,6 +5,10 @@ set -ex
 dir=`dirname "$0"`
 source ${dir}/utils.sh
 
+bosh_cli=${BOSH_CLI}
+bosh_cli_password=${BOSH_CLI_PASSWORD}
+deployment_yml=${DEPLOYMENT_YML}
+
 function get_old_new_versions (){
   print_title "GET OLD AND NEW VERSIONS OF STEMCELL/SECURITY RELEASE..."
   old_stemcell_version=`bosh stemcells|grep bosh-softlayer-xen-ubuntu-trusty-go_agent|awk '{print $6}'|sed 's/\*//g'`
@@ -51,10 +55,6 @@ function bosh_deploy (){
   fi
 }
 
-bosh_cli=${BOSH_CLI}
-bosh_cli_password=${BOSH_CLI_PASSWORD}
-deployment_yml=${DEPLOYMENT_YML}
-
 install_bosh_cli
 echo "login director..."
 bosh -n target ${BLUEMIX_DIRECTOR_IP}
@@ -66,4 +66,4 @@ upload_releases
 
 update_deployment_yml
 
-bosh_deploy
+#bosh_deploy
