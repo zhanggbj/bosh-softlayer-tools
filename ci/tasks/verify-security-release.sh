@@ -42,7 +42,7 @@ bosh vms|awk '/running/{print $11}' > ipaddr.csv
 run_log="run.log"
 echo "run test-component.sh on all VMs..."
 ./run.sh -s test-component.sh -i ipaddr.csv -p Paa54futur3 -a | tee $run_log
-sleep 3
+sleep 300
 
 cat $run_log | grep "Error connecting to server"
 if [ $? -eq 0 ]; then
