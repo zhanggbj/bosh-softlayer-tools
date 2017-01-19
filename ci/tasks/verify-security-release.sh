@@ -42,8 +42,9 @@ bosh vms|awk '/running/{print $11}' > ipaddr.csv
 run_log="run.log"
 echo "run test-component.sh on all VMs..."
 ./run.sh -s test-component.sh -i ipaddr.csv -p Paa54futur3 -a | tee $run_log
-sleep 300
+sleep 10
 
+echo "analysing run log..."
 cat $run_log | grep "Error connecting to server"
 if [ $? -eq 0 ]; then
    exit 1
@@ -55,6 +56,7 @@ if [ $final_result -eq 0 ]; then
   exit 0
 else
   echo "Security release verification fail..."
+  echo "At least scripts on" $final_result "VM failed..."
   exit 1
 fi
 
