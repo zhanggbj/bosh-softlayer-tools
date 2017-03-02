@@ -11,12 +11,27 @@
   echo -e "\n Get stemcell version..."
   STEMCELL_VERSION=$(cat stemcell-version/number | sed 's/\.0$//;s/\.0$//')
 
+  pushd candidate-stemcell-ubuntu-trusty
+    echo -e "\n Unpacking raw stemcell tgz..."
+    tar zxf *.tgz
+    ls -la
+    cp dev_tools_file_list.txt stemcell_dpkg_l.txt "${base_gopath}/../new-light-stemcell/"
+# dd gzip -d light-bosh-stemcell-3363.13-softlayer-xen-ubuntu-trusty-go_agent.tgz
+#  tar rvf light-bosh-stemcell-3363.13-softlayer-xen-ubuntu-trusty-go_agent.tar zhg.log
+  popd
+
   echo -e "\n Creating stemcell binary..."
-  cd "${base}"
-  go build -o out/sl_stemcells main/stemcells/stemcells.go
+  pushd "${base}"
+    go build -o out/sl_stemcells main/stemcells/stemcells.go
 
-  echo -e "\n Softlayer create light stemcell..."
-  out/sl_stemcells -c light-stemcell --version $STEMCELL_VERSION --stemcell-info-filename "${base_gopath}/../stemcell-info/stemcell-info.json"
+    echo -e "\n Softlayer create light stemcell..."
+    out/sl_stemcells -c light-stemcell --version $STEMCELL_VERSION --stemcell-info-filename "${base_gopath}/../stemcell-info/stemcell-info.json"
 
-  cp *.tgz "${base_gopath}/../new-light-stemcell/"
+    cp *.tgz "${base_gopath}/../new-light-stemcell/"
+    pushd "${base_gopath}/../new-light-stemcell/"
+      light_stemcell_name=light-bosh-stemcell-${STEMCELL_VERSION}-softlayer-xen-ubuntu-trusty-go_agent
+      tar -zxvf ${light_stemcell_name}.tgz
+      tar -zcvf ${light_stemcell_name}.tgz image stemcell.MF dev_tools_file_list.txt stemcell_dpkg_l.txt
+    popd
+  popd
 )

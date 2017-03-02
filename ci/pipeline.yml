@@ -70,6 +70,7 @@ jobs:
       passed: [import-stemcell]
       trigger: true
     - get: stemcell-version
+    - get: candidate-stemcell-ubuntu-trusty
   - task: create-light-stemcell
     file: bosh-softlayer-tools/ci/tasks/create-light-stemcell.yml
     params:
