@@ -10,6 +10,7 @@ inputs:
     path: gopath/src/github.com/cloudfoundry-community/bosh-softlayer-tools
   - name: stemcell-info
   - name: version
+  - name: stemcell
 outputs:
   - name: light-stemcell
 

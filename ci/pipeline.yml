@@ -70,11 +70,15 @@ jobs:
       passed: [import-stemcell]
       trigger: true
     - get: stemcell-version
+    - get: candidate-stemcell-ubuntu-trusty
   - task: create-light-stemcell
     file: bosh-softlayer-tools/ci/tasks/create-light-stemcell.yml
     params:
       SL_USERNAME: {{softlayer_username}}
       SL_API_KEY: {{softlayer_api_key}}
+    input_mapping:
+      stemcell: candidate-stemcell-ubuntu-trusty
+
   - put: light-stemcell
     params: {file: new-light-stemcell/*.tgz}
 

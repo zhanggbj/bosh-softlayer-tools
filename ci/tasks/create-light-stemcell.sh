@@ -14,6 +14,13 @@
 
   export GOPATH=$base_gopath:$GOPATH
 
+  pushd stemcell
+    echo -e "\n Unpacking stemcell raw tgz..."
+    tar -zxvf *.tgz
+    ls -la
+    cp dev_tools_file_list.txt stemcell_dpkg_l.txt "${base}"
+  popd
+
   echo -e "\n Creating stemcell binary..."
   cd "${base}"
   go build -o out/sl_stemcells main/stemcells/stemcells.go
@@ -21,9 +28,10 @@
   echo -e "\n Softlayer creating light stemcell..."
   out/sl_stemcells -c light-stemcell --version ${stemcell_version} --stemcell-info-filename "${base_gopath}/../stemcell-info/stemcell-info.json"
 
-  cp *.tgz "${base_gopath}/../${output_dir}/"
-
   stemcell_filename=`ls light*.tgz`
+  tar -zxvf ${stemcell_name}.tgz
+  tar -zcvf ${stemcell_name}.tgz image stemcell.MF dev_tools_file_list.txt stemcell_dpkg_l.txt
+  cp *.tgz "${base_gopath}/../${output_dir}/"
 
   checksum="$(sha1sum "${base_gopath}/../${output_dir}/${stemcell_filename}" | awk '{print $1}')"
   echo "$stemcell_filename sha1=$checksum"
